@@ -1,0 +1,1 @@
+# trait_openclinica_installation
