@@ -24,8 +24,8 @@ All additions are marked with the comment string 'TRAIT-ADDITION'
    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
       <fileNamePattern>${log.dir}-exports.%d{yyyy-MM-dd}.log</fileNamePattern>
-      <!-- keep 30 days' worth of history -->
-      <maxHistory>30</maxHistory>
+      <!-- keep 90 days' worth of history -->
+      <maxHistory>90</maxHistory>
     </rollingPolicy>
     <encoder>
 <!-- removed [%mdc{WEBAPP}] -->
@@ -38,7 +38,7 @@ All additions are marked with the comment string 'TRAIT-ADDITION'
     <File>${log.dir}-ttp.log</File>
    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>${log.dir}-exports.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>${log.dir}-ttp.%d{yyyy-MM-dd}.log</fileNamePattern>
       <!-- keep 30 days' worth of history -->
       <maxHistory>30</maxHistory>
     </rollingPolicy>
