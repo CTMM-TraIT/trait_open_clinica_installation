@@ -11,3 +11,6 @@ The functions are:
 - Rebranding: contains a ZIP-file with the logo's, bash-scripts and the modified JSP's for the rebranding of OpenClinica. Each environment has it's own script (PROD, ACC, SANDBOX and ARCHIVE). 
 
 - Fix for OC-4783. This fix addreses the problem that no year-of-birth of a subject is not exported. OC has not yet included the fix in the main-code branch. A XSLT-file is updated.
+
+- Addition of extra logging incase of exports. The reciepient's e-mail address(es), the names and technical-ID's of fields exported, the study, the userID of the requestor, the export format and the dataset name are explicitly logged. This was requested by a security-officer of a hospital. 
+The modified classes are added to the core-library jar-file with a script. The entire packed is located in the 'patches' directory. These changes have been submitted to OpenClinica but have not yet been accepted. The output is sent to a separate logfile called 'openclinica-exports.log' which is rolled over monthly; c.f. the logging-test.xml file also included in the ExportLogging.tar.gz file. 
