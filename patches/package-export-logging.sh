@@ -67,6 +67,10 @@ jar -uf ./OpenClinica.war $CORE_JAR_FILE_NAME
 
 mkdir -p WEB-INF/classes/org/akaza/openclinica/control/extract
 
+
+cp $PROJECT_BASE_DIR/web/target/classes/datainfo.properties ./WEB-INF/classes
+jar -uf OpenClinica.war ./WEB-INF/classes/datainfo.properties
+
 cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/extract/AccessFileServlet.class ./WEB-INF/classes/org/akaza/openclinica/control/extract/
 jar -uf OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/extract/AccessFileServlet.class
 
