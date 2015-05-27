@@ -26,12 +26,18 @@ cp  ~/tomcat/webapps/OpenClinica.war ~/backup-export-logging
 cp ~/tomcat/webapps/OpenClinica/WEB-INF/classes/datainfo.properties ~/backup-export-logging
 rm -rf ~/tomcat/webapps/OpenClinica
 # rm -rf ~/tomcat/work/Catalina/localhost/OpenClinica
+
+jar xf OpenClinica-ExportLogging.war WEB-INF/classes/datainfo.properties
+mv WEB-INF/classes/datainfo.properties ./datainfo-modified.properties
+tail -n8 datainfo-modified.properties >> ~/backup-export-logging/datainfo.properties
+
+
 cp ./OpenClinica-ExportLogging.war ~/tomcat/webapps/OpenClinica.war
 cd ~/tomcat/logs
-echo 'Starting up OpenClinica - please wait for 2 minutes'
+echo 'Starting up OpenClinica - script will wait 2 minutes and then proceed'
 ../bin/startup.sh
 sleep 120
-echo 'Shutting down OpenClinica - please wait for 2 minutes'
+echo 'Shutting down OpenClinica - script will wait 2 minutes and then proceed'
 ../bin/shutdown.sh
 sleep 120
 cp ~/backup-export-logging/datainfo.properties ~/tomcat/webapps/OpenClinica/WEB-INF/classes/

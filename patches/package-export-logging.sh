@@ -35,7 +35,11 @@ echo "Tomcat home directory is $TOMCAT_HOME_DIR"
 
 
 # unpack the modified java source files and copy them to the correct location under the OpenClinica source
-tar -zcvf ExportLogging.tar.gz $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/ExportLogger.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
+tar -xvf ExportLogging.tar ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
+
+cp ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java        $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/ExportLogger.java
+cp ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java    $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java
+cp ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java  $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
 
 # now build OpenClinica
 cd $PROJECT_BASE_DIR
@@ -45,6 +49,7 @@ cd $CURRENT_DIR
 
 mkdir ~/package-export-logging
 cp ../logging/logback-test.xml ~/package-export-logging
+cp ../logging/datainfo.properties ~/package-export-logging
 cd ~/package-export-logging
 cp $TOMCAT_HOME_DIR/webapps/OpenClinica.war .
 
@@ -68,7 +73,7 @@ jar -uf ./OpenClinica.war $CORE_JAR_FILE_NAME
 mkdir -p WEB-INF/classes/org/akaza/openclinica/control/extract
 
 
-cp $PROJECT_BASE_DIR/web/target/classes/datainfo.properties ./WEB-INF/classes
+mv ./datainfo.properties ./WEB-INF/classes
 jar -uf OpenClinica.war ./WEB-INF/classes/datainfo.properties
 
 cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/extract/AccessFileServlet.class ./WEB-INF/classes/org/akaza/openclinica/control/extract/
@@ -78,6 +83,14 @@ jar -uf OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/extract/
 mv ./OpenClinica.war ./OpenClinica-ExportLogging.war
 rm -rf ./org
 rm -rf ./WEB-INF
+rm ./logback-test.xml
+echo "Modified OpenClinica WAR file can be found in `pwd ~/package-export-logging`"
 cd $CURRENT_DIR
 
+echo "Cleaning up"
+
+
+rm -rf ./core/
+rm -rf ./web/
 echo "Finished"
+
