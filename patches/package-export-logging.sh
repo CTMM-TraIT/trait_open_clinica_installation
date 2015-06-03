@@ -95,7 +95,7 @@ cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/extract/Ac
 jar -uf OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/extract/AccessFileServlet.class
 
 # the file name OpenClinica-ExportLogging.war is expected by the deploy-export-logging.sh
-mv ./OpenClinica.war ./OpenClinica-ExportLogging.war
+mv ./OpenClinica.war ./OpenClinica-Patched.war
 rm -rf ./org
 rm -rf ./WEB-INF
 rm ./logback-test.xml
