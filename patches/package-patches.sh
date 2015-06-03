@@ -47,14 +47,14 @@ mvn clean install -DskipTests=true
 cd $CURRENT_DIR
 
 
-mkdir ~/package-export-logging
-mkdir -p ~/package-export-logging/properties/xslt
-cp ../logging/logback-test.xml ~/package-export-logging
-cp ../logging/datainfo.properties ~/package-export-logging
-cp ./properties/xslt/*.* ~/package-export-logging/properties/xslt
+mkdir ~/package-patches
+mkdir -p ~/package-patches/properties/xslt
+cp ../logging/logback-test.xml ~/package-patches
+cp ../logging/datainfo.properties ~/package-patches
+cp ./properties/xslt/*.* ~/package-patches/properties/xslt
 
 
-cd ~/package-export-logging
+cd ~/package-patches
 cp $TOMCAT_HOME_DIR/webapps/OpenClinica.war .
 
 CORE_JAR_FILE_NAME=`jar -tvf OpenClinica.war | grep OpenClinica-core | grep jar | awk '{print $8}'`
@@ -101,11 +101,11 @@ rm -rf ./WEB-INF
 rm ./logback-test.xml
 rm -rf ./properties
 
-echo "Modified OpenClinica WAR file can be found in `pwd ~/package-export-logging`"
+echo "Modified OpenClinica WAR file can be found in `pwd ~/package-patches`"
 
 
 cd $CURRENT_DIR
-cp ./deploy-export-logging.sh ~/package-export-logging
+cp ./deploy-patches.sh ~/package-patches
 
 echo "Cleaning up"
 
