@@ -41,6 +41,8 @@ echo 'Shutting down OpenClinica - script will wait 2 minutes and then proceed'
 ../bin/shutdown.sh
 sleep 120
 cp ~/backup-export-logging/datainfo.properties ~/tomcat/webapps/OpenClinica/WEB-INF/classes/
+
+rm -rf ./WEB-INF/
 echo 'Finished, please startup Tomcat'
 
 

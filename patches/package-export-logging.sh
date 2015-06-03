@@ -35,12 +35,12 @@ echo "Tomcat home directory is $TOMCAT_HOME_DIR"
 
 
 # unpack the modified java source files and copy them to the correct location under the OpenClinica source
-tar -xvf ExportLogging.tar ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
+tar -xvf ExportLogging.tar ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java
 
 cp ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java        $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/ExportLogger.java
 cp ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java    $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java
 cp ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java  $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
-
+cp ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java
 # now build OpenClinica
 cd $PROJECT_BASE_DIR
 mvn clean install -DskipTests=true
@@ -58,10 +58,16 @@ echo "Core jar file name: $CORE_JAR_FILE_NAME"
 jar -xvf OpenClinica.war $CORE_JAR_FILE_NAME
 
 mkdir -p ./org/akaza/openclinica/job/
+
 cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/job/ExportLogger.class ./org/akaza/openclinica/job
 cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/job/XsltTransformJob.class ./org/akaza/openclinica/job
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/job/ExportLogger.class
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/job/XsltTransformJob.class
+
+
+mkdir -p ./org/akaza/openclinica/domain/rule/action/
+cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/domain/rule/action/RuleActionComparator.class ./org/akaza/openclinica/domain/rule/action
+jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/domain/rule/action/RuleActionComparator.class
 
 
 jar -uf $CORE_JAR_FILE_NAME ./logback-test.xml
@@ -70,7 +76,7 @@ jar -uf $CORE_JAR_FILE_NAME ./logback-test.xml
 # update the JAR file in the WAR
 jar -uf ./OpenClinica.war $CORE_JAR_FILE_NAME
 
-mkdir -p WEB-INF/classes/org/akaza/openclinica/control/extract
+mkdir -p ./WEB-INF/classes/org/akaza/openclinica/control/extract
 
 
 mv ./datainfo.properties ./WEB-INF/classes
@@ -84,8 +90,12 @@ mv ./OpenClinica.war ./OpenClinica-ExportLogging.war
 rm -rf ./org
 rm -rf ./WEB-INF
 rm ./logback-test.xml
+
 echo "Modified OpenClinica WAR file can be found in `pwd ~/package-export-logging`"
+
+
 cd $CURRENT_DIR
+cp ./deploy-export-logging.sh ~/package-export-logging
 
 echo "Cleaning up"
 
