@@ -48,8 +48,12 @@ cd $CURRENT_DIR
 
 
 mkdir ~/package-export-logging
+mkdir -p ~/package-export-logging/properties/xslt
 cp ../logging/logback-test.xml ~/package-export-logging
 cp ../logging/datainfo.properties ~/package-export-logging
+cp ./properties/xslt/*.* ~/package-export-logging/properties/xslt
+
+
 cd ~/package-export-logging
 cp $TOMCAT_HOME_DIR/webapps/OpenClinica.war .
 
@@ -72,6 +76,11 @@ jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/domain/rule/action/RuleActio
 
 jar -uf $CORE_JAR_FILE_NAME ./logback-test.xml
 
+jar -uf $CORE_JAR_FILE_NAME ./properties/xslt/odm_to_html.xsl
+jar -uf $CORE_JAR_FILE_NAME ./properties/xslt/odm_spss_sps.xsl
+jar -uf $CORE_JAR_FILE_NAME ./properties/xslt/odm_spss_dat.xsl
+jar -uf $CORE_JAR_FILE_NAME ./properties/xslt/ODMToTAB.xsl
+
 
 # update the JAR file in the WAR
 jar -uf ./OpenClinica.war $CORE_JAR_FILE_NAME
@@ -90,6 +99,7 @@ mv ./OpenClinica.war ./OpenClinica-ExportLogging.war
 rm -rf ./org
 rm -rf ./WEB-INF
 rm ./logback-test.xml
+rm -rf ./properties
 
 echo "Modified OpenClinica WAR file can be found in `pwd ~/package-export-logging`"
 
