@@ -52,11 +52,11 @@ mkdir -p $BACKUP_DIR
 BACKUP_DIR=~/$BACKUP_DIR
 cd $CURRENT_DIR
 
-cp  ~/tomcat/webapps/OpenClinica.war $BACKUP_DIR
-cp ~/tomcat/webapps/OpenClinica/WEB-INF/classes/datainfo.properties $BACKUP_DIR/datainfo.properties
+cp -v ~/tomcat/webapps/OpenClinica.war $BACKUP_DIR
+cp -v ~/tomcat/webapps/OpenClinica/WEB-INF/classes/datainfo.properties $BACKUP_DIR/datainfo.properties
 
-cp  ~/tomcat/webapps/OpenClinica-ws.war $BACKUP_DIR
-cp ~/tomcat/webapps/OpenClinica-ws/WEB-INF/classes/datainfo.properties $BACKUP_DIR/datainfo-ws.properties
+cp -v ~/tomcat/webapps/OpenClinica-ws.war $BACKUP_DIR
+cp -v ~/tomcat/webapps/OpenClinica-ws/WEB-INF/classes/datainfo.properties $BACKUP_DIR/datainfo-ws.properties
 
 
 #
@@ -67,20 +67,10 @@ rm -rf ~/tomcat/work/Catalina/localhost/OpenClinica
 rm -rf ~/tomcat/webapps/OpenClinica-ws
 rm -rf ~/tomcat/work/Catalina/localhost/OpenClinica-ws
 
-# jar xf OpenClinica-3.6-${OC_ENVIRONMENT}.war WEB-INF/classes/datainfo.properties
-# mv WEB-INF/classes/datainfo.properties ./datainfo-modified.properties
-# tail -n8 datainfo-modified.properties >> $BACKUP_DIR/datainfo.properties
-# cp datainfo-modified.properties $BACKUP_DIR/datainfo.properties
 
 
-# jar xf OpenClinica-ws-3.6-${OC_ENVIRONMENT}.war WEB-INF/classes/datainfo.properties
-# mv WEB-INF/classes/datainfo.properties ./datainfo-ws-modified.properties
-# tail -n8 datainfo-ws-modified.properties >> $BACKUP_DIR/datainfo-ws.properties
-# cp datainfo-ws-modified.properties $BACKUP_DIR/datainfo-ws.properties
-
-
-cp ./OpenClinica-3.6-${OC_ENVIRONMENT}.war ~/tomcat/webapps/OpenClinica.war
-cp ./OpenClinica-ws-3.6-${OC_ENVIRONMENT}.war ~/tomcat/webapps/OpenClinica-ws.war
+cp -v ./OpenClinica-3.6-${OC_ENVIRONMENT}.war ~/tomcat/webapps/OpenClinica.war
+cp -v ./OpenClinica-ws-3.6-${OC_ENVIRONMENT}.war ~/tomcat/webapps/OpenClinica-ws.war
 
 cd ~/tomcat/logs
 echo 'Starting up OpenClinica - script will wait 1 minute and then proceed'
@@ -90,14 +80,14 @@ echo 'Shutting down OpenClinica - script will wait 1 minute and then proceed'
 ../bin/shutdown.sh
 sleep 60
 
-cp $BACKUP_DIR/datainfo.properties ~/tomcat/openclinica.config/datainfo.properties
-cp $BACKUP_DIR/datainfo-ws.properties ~/tomcat/openclinica-ws.config/datainfo.properties
+cp -v $BACKUP_DIR/datainfo.properties ~/tomcat/openclinica.config/datainfo.properties
+cp -v $BACKUP_DIR/datainfo-ws.properties ~/tomcat/openclinica-ws.config/datainfo.properties
+cp -v $BACKUP_DIR/datainfo.properties ~/tomcat/webapps/OpenClinica/WEB-INF/classes/datainfo.properties
+cp -v $BACKUP_DIR/datainfo-ws.properties ~/tomcat/webapps/OpenClinica-ws/WEB-INF/classes/datainfo.properties
+
 
 rm -rf ./WEB-INF/
-rm ./datainfo-modified.properties
-rm ./datainfo-ws-modified.properties
+
 
 echo 'Finished, please startup Tomcat'
-
-
 
