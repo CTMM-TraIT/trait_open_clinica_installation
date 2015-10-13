@@ -39,6 +39,11 @@ cp ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java    $PROJ
 cp ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java  $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
 cp ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java
 
+# the fix for browsing through the Notes & Discrepancies
+cp ./dn-browsing/ListNotesTableFactory.java $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/submit/ListNotesTableFactory.java
+cp ./dn-browsing/ViewNotesDaoImpl.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.java
+
+# now the rebranding components
 cp ../rebranding/trait.css 		$PROJECT_BASE_DIR/web/src/main/webapp/includes/trait.css
 cp ../rebranding/Logo.gif	 	$PROJECT_BASE_DIR/web/src/main/webapp/images/Logo.gif
 cp ../rebranding/OC_login_logo.png	$PROJECT_BASE_DIR/web/src/main/webapp/images/OC_login_logo.png
@@ -119,6 +124,17 @@ cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/domain/rule/actio
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/domain/rule/action/RuleActionComparator.class
 echo "Done fixing RuleActionComparator"
 
+echo "Fixing Notes&Discrepancy browsing (OC-6757, TraIT1509 330)"
+
+mkdir -p ./org/akaza/openclinica/dao/managestudy/
+cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.class ./org/akaza/openclinica/dao/managestudy
+jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.class
+
+mkdir -p ./WEB-INF/classes/org/akaza/openclinica/control/submit/
+cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/submit/ListNotesTableFactory.class ./WEB-INF/classes/org/akaza/openclinica/control/submit
+jar -uf ./OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/submit/ListNotesTableFactory.class
+
+echo "Done fixsing Notes&Discrepancy browsing"
 
 echo "Fixing Year-of-Birth in SPSS-export"
 jar -uf $CORE_JAR_FILE_NAME ./logback-test.xml
