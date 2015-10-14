@@ -208,7 +208,7 @@ rm -rf ./properties
 
 
 cd $CURRENT_DIR
-cp ../upgrades/deploy-oc3.6.sh ~/package-patches
+cp -p ../upgrades/deploy-oc3.6-patch.sh ~/package-patches
 
 
 
