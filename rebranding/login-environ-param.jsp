@@ -171,4 +171,5 @@
 
 <!-- Footer -->
 <!-- End Main Content Area -->
+<!-- TraIT patch version 0.01; TraIT1509 330. Built {{{BUILD_DATE}}} -->
 <jsp:include page="../login-include/login-footer.jsp"/>

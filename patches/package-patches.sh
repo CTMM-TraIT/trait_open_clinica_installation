@@ -166,8 +166,9 @@ mkdir -p ./WEB-INF/jsp/login
 cp $PROJECT_BASE_DIR/web/src/main/webapp/WEB-INF/jsp/login/login.jsp ./WEB-INF/jsp/login/login.jsp
 
 # PRODUCTION and ARCHIVE first
+CURRENT_TIMESTAMP=`date`
 
-sed "s/{{{ENVIRONMENT}}}//" login-environ-param.jsp > ./WEB-INF/jsp/login/login.jsp
+sed "s/{{{ENVIRONMENT}}}//" login-environ-param.jsp | sed "s/{{{BUILD_DATE}}}/$CURRENT_TIMESTAMP/" > ./WEB-INF/jsp/login/login.jsp
 jar -uf OpenClinica.war ./WEB-INF/jsp/login/login.jsp
 
 cp ./OpenClinica.war ./OpenClinica-3.6-PROD.war
@@ -176,14 +177,14 @@ cp ./OpenClinica-ws.war ./OpenClinica-ws-3.6-PROD.war
 cp ./OpenClinica-ws.war ./OpenClinica-ws-3.6-ARCHIVE.war
 
 # Next acceptange
-sed "s/{{{ENVIRONMENT}}}/>> This is the ACCEPTANCE environment. Do not use for actual clinical trial data entry <</" login-environ-param.jsp > ./WEB-INF/jsp/login/login.jsp
+sed "s/{{{ENVIRONMENT}}}/>> This is the ACCEPTANCE environment. Do not use for actual clinical trial data entry <</" login-environ-param.jsp | sed "s/{{{BUILD_DATE}}}/$CURRENT_TIMESTAMP/" > ./WEB-INF/jsp/login/login.jsp
 jar -uf OpenClinica.war ./WEB-INF/jsp/login/login.jsp
 
 cp ./OpenClinica.war ./OpenClinica-3.6-ACCEPTANCE.war
 cp ./OpenClinica-ws.war ./OpenClinica-ws-3.6-ACCEPTANCE.war
 
 # Next sandbox
-sed "s/{{{ENVIRONMENT}}}/>> This is the SANDBOX environment. Do not use for actual clinical trial data entry <</" login-environ-param.jsp > ./WEB-INF/jsp/login/login.jsp
+sed "s/{{{ENVIRONMENT}}}/>> This is the SANDBOX environment. Do not use for actual clinical trial data entry <</" login-environ-param.jsp | sed "s/{{{BUILD_DATE}}}/$CURRENT_TIMESTAMP/" > ./WEB-INF/jsp/login/login.jsp
 jar -uf OpenClinica.war ./WEB-INF/jsp/login/login.jsp
 
 cp ./OpenClinica.war ./OpenClinica-3.6-SANDBOX.war
