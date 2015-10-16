@@ -41,7 +41,8 @@ cp ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionCompa
 
 # the fix for browsing through the Notes & Discrepancies
 cp ./dn-browsing/ListNotesTableFactory.java $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/submit/ListNotesTableFactory.java
-cp ./dn-browsing/ViewNotesDaoImpl.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.java
+cp ./dn-browsing/discrepancy_note_dao.xml $PROJECT_BASE_DIR/core/src/main/resources/properties/discrepancy_note_dao.xml
+
 
 # now the rebranding components
 cp ../rebranding/trait.css 		$PROJECT_BASE_DIR/web/src/main/webapp/includes/trait.css
@@ -126,9 +127,9 @@ echo "Done fixing RuleActionComparator"
 
 echo "Fixing Notes&Discrepancy browsing (OC-6757, TraIT1509 330)"
 
-mkdir -p ./org/akaza/openclinica/dao/managestudy/
-cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.class ./org/akaza/openclinica/dao/managestudy
-jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/dao/managestudy/ViewNotesDaoImpl.class
+
+cp $PROJECT_BASE_DIR/core/target/classes/properties/discrepancy_note_dao.xml ./properties
+jar -uf $CORE_JAR_FILE_NAME ./properties/discrepancy_note_dao.xml
 
 mkdir -p ./WEB-INF/classes/org/akaza/openclinica/control/submit/
 cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/submit/ListNotesTableFactory.class ./WEB-INF/classes/org/akaza/openclinica/control/submit
