@@ -171,5 +171,5 @@
 
 <!-- Footer -->
 <!-- End Main Content Area -->
-<!-- TraIT patch version 0.02; TraIT1509 330. Built {{{BUILD_DATE}}} -->
+<!-- TraIT patch version 0.03; TraIT1509 330 and OP-133 export logging of audittrail file. Built {{{BUILD_DATE}}} -->
 <jsp:include page="../login-include/login-footer.jsp"/>

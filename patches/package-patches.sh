@@ -32,8 +32,9 @@ echo "Source directory is $PROJECT_BASE_DIR"
 
 
 # unpack the modified java source files and copy them to the correct location under the OpenClinica source
-tar -xvf ExportLogging.tar ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionComparator.java
+jar -xvf ExportLogging.jar
 
+cp ./web/src/main/java/org/akaza/openclinica/control/managestudy/ExportExcelStudySubjectAuditLogServlet.java $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/managestudy/ExportExcelStudySubjectAuditLogServlet.java
 cp ./core/src/main/java/org/akaza/openclinica/job/ExportLogger.java        $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/ExportLogger.java
 cp ./core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java    $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/job/XsltTransformJob.java
 cp ./web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java  $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/extract/AccessFileServlet.java
@@ -116,6 +117,12 @@ cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/job/ExportLogger.
 cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/job/XsltTransformJob.class ./org/akaza/openclinica/job
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/job/ExportLogger.class
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/job/XsltTransformJob.class
+
+mkdir -p ./WEB-INF/classes/org/akaza/openclinica/control/managestudy/
+cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/managestudy/ExportExcelStudySubjectAuditLogServlet.class ./WEB-INF/classes/org/akaza/openclinica/control/managestudy
+jar -uf ./OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/managestudy/ExportExcelStudySubjectAuditLogServlet.class
+
+
 echo "Done adding export logging patch"
 
 
@@ -221,6 +228,7 @@ cp -p ../upgrades/deploy-oc3.6-patch.sh ~/package-patches
 
 rm -rf ./core/
 rm -rf ./web/
+rm -rf ./META-INF/
 echo "Finished"
 echo "Modified OpenClinica WAR file can be found in ~/package-patches"
 
