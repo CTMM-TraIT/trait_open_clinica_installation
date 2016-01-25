@@ -56,18 +56,23 @@
                 <tbody>
                         <tr>
                                 <td id="imageTraIT">
+                                    <div id="imageTraITContainer">
                                         <a href="http://www.ctmm-trait.nl">
                                                 <img src="<c:url value='/images/TraIT_logo.png'/>" alt="trait-logo"/>
                                         </a>
                                         <p>WELCOME TO OPENCLINICA</p>
+                                    </div>
                                 </td>
-                                <td id="filler">&nbsp;</td>
                                 <td id="welcomeTextTraIT">
-                                        <p>This application is supported by the CTMM TraIT project.</p>
+                                        <p>This electronic CRF application is supported by the CTMM TraIT project and
+                                            offered for use in Dutch investigator initiated clinical or biomedical research
+                                            projects and international partners in these projects.</p>
                                         <p>
-                                                The TraIT project focuses on the integration and querying of information across the four major domains of CTMM's translational
-                                                research - clinical data, imaging data, biobanking and genomics/proteomics data. Much of the development will be performed in
-                                                collaboration with groups at the global and European level.
+                                            Please contact us via the <a href="${pageContext.request.contextPath}/Contact">TraIT servicedesk</a> for more information; tel. 088-1167500
+                                        </p>
+                                        <p>
+                                            We support a broad spectrum of applications for use in biomedical and clinical research.
+                                            Please visit our website for more information:<br/><a href="http://www.ctmm-trait.nl/trait-tools">http://www.ctmm-trait.nl/trait-tools</a>
                                         </p>
                                 </td>
                         </tr>
