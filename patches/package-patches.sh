@@ -139,9 +139,6 @@ mkdir -p ./org/akaza/openclinica/dao/managestudy/
 cp $PROJECT_BASE_DIR/core/target/classes/org/akaza/openclinica/dao/managestudy/DiscrepancyNoteDAO.class ./org/akaza/openclinica/dao/managestudy
 jar -uf $CORE_JAR_FILE_NAME ./org/akaza/openclinica/dao/managestudy/DiscrepancyNoteDAO.class
 
-cp $PROJECT_BASE_DIR/core/target/classes/properties/discrepancy_note_dao.xml ./properties
-jar -uf $CORE_JAR_FILE_NAME ./properties/discrepancy_note_dao.xml
-
 mkdir -p ./WEB-INF/classes/org/akaza/openclinica/control/submit/
 cp $PROJECT_BASE_DIR/web/target/classes/org/akaza/openclinica/control/submit/ListNotesTableFactory.class ./WEB-INF/classes/org/akaza/openclinica/control/submit
 jar -uf ./OpenClinica.war ./WEB-INF/classes/org/akaza/openclinica/control/submit/ListNotesTableFactory.class
