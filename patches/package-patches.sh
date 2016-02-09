@@ -43,7 +43,6 @@ cp ./core/src/main/java/org/akaza/openclinica/domain/rule/action/RuleActionCompa
 # the fix for browsing through the Notes & Discrepancies
 cp ./dn-browsing/ListNotesTableFactory.java $PROJECT_BASE_DIR/web/src/main/java/org/akaza/openclinica/control/submit/ListNotesTableFactory.java
 cp ./dn-browsing/DiscrepancyNoteDAO.java $PROJECT_BASE_DIR/core/src/main/java/org/akaza/openclinica/dao/managestudy/DiscrepancyNoteDAO.java
-cp ./dn-browsing/discrepancy_note_dao.xml $PROJECT_BASE_DIR/core/src/main/resources/properties/discrepancy_note_dao.xml
 
 
 # now the rebranding components
